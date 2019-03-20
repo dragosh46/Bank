@@ -21,8 +21,12 @@ namespace Bank
 
             Console.WriteLine("Choose an action:");
             action = Convert.ToChar(Console.ReadLine().ToLower());
+
+             AccountList CreateNewAccount = new AccountList();
             while (action != 'h')
             {
+               
+                
                 switch (action)
                 {
                     case 'm':
@@ -34,7 +38,7 @@ namespace Bank
                         break;
                     case 'a':
                         Console.Clear();
-                        AccountList CreateNewAccount = new AccountList();
+                        
                         
                             Console.WriteLine("Enter the name: ");
                             string Name = Console.ReadLine();
@@ -52,9 +56,9 @@ namespace Bank
                         Console.Clear();
                         Console.WriteLine("Enter the IBAN: ");
                         string depositIBAN = Console.ReadLine();
-                        AccountList accountForDeposit = new AccountList();
-                        double initialAmount = accountForDeposit.GetInitialAmount(depositIBAN);
-                        accountForDeposit.Deposit(depositIBAN, initialAmount);
+                        
+                        double initialAmount = CreateNewAccount.GetInitialAmount(depositIBAN);
+                        CreateNewAccount.Deposit(depositIBAN, initialAmount);
                         action = 'm';
                         break;
                     case 'c':
@@ -62,8 +66,7 @@ namespace Bank
                         Withdraw withdraw = new Withdraw();
                         Console.WriteLine("Enter the IBAN: ");
                         string withdrawIBAN = Console.ReadLine();
-                        AccountList accountForWithdraw = new AccountList();
-                        double initialWithdrawAmount = accountForWithdraw.GetInitialAmount(withdrawIBAN);
+                        double initialWithdrawAmount = CreateNewAccount.GetInitialAmount(withdrawIBAN);
                         withdraw.GetWithdraw(withdrawIBAN, ref initialWithdrawAmount);
 
                         break;
@@ -71,22 +74,17 @@ namespace Bank
                         Console.Clear();
                         Console.WriteLine("Enter the IBAN: ");
                         string soldIBAN = Console.ReadLine();
-                        AccountList accountForSold = new AccountList();
-                        double soldAmount = accountForSold.GetInitialAmount(soldIBAN);
-
-                        Sold sold = new Sold();
-                        sold.GetSold(soldIBAN, soldAmount);
-
+                        double soldAmount = CreateNewAccount.GetInitialAmount(soldIBAN);
+                        Console.WriteLine("Your balance is: "+soldAmount);
                         break;
 
                     case 'e':
                         Console.Clear();
-                        AccountList deleteAccount = new AccountList();
                         Console.WriteLine("Enter the name for deleting the account:");
                         string nameForDelete = Console.ReadLine();
                         Console.WriteLine("Enter the IBAN for deleting the account:");
                         string ibanForDelete = Console.ReadLine();
-                        var newList = deleteAccount.DeleteAccount(nameForDelete, ibanForDelete);
+                        var newList = CreateNewAccount.DeleteAccount(nameForDelete, ibanForDelete);
                         foreach (var item in newList)
                         {
                             Console.WriteLine($"{item.Name}");
@@ -97,8 +95,8 @@ namespace Bank
 
                         break;
                     case 'f':
-                        AccountList newAccount = new AccountList();
-                        var sortedList = newAccount.ordonatedList();
+                        
+                        var sortedList = CreateNewAccount.ordonatedList();
                         foreach (var listItem in sortedList)
                         {
                             Console.WriteLine($"{listItem.Name}");
@@ -109,8 +107,8 @@ namespace Bank
 
                         break;
                     case 'g':
-                        AccountList updateAdressAccount = new AccountList();
-                        var updatedList = updateAdressAccount.changeAccount();
+                        
+                        var updatedList = CreateNewAccount.changeAccount();
                         foreach (var item in updatedList)
                         {
                             Console.WriteLine($"{item.Name}");

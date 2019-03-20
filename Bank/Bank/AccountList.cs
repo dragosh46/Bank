@@ -11,6 +11,11 @@ namespace Bank
     {
        List<Account> accountList = new List<Account>();
         
+        public IEnumerable<Account> returnAccountList()
+        {
+            var accountListreturned = accountList;
+            return accountListreturned;
+        }
         public void AddAccount(string Name,double Amount,string IBAN,string Adress)
         {
 
@@ -57,5 +62,6 @@ namespace Bank
             double initialAmount = initialAccount.Amount;
             return initialAmount;
         }
+        
     }
 }

@@ -18,7 +18,7 @@ namespace Bank
             Console.WriteLine("e. Delete account");
             Console.WriteLine("f. 3 accounts");
             Console.WriteLine("g. Update adress");
-            Console.WriteLine("h. Exit");
+            Console.WriteLine("h. Exit"+Environment.NewLine);
             return action;
         }
     }
