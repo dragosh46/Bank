@@ -15,8 +15,10 @@ namespace Bank
             Console.WriteLine("b. Deposit");
             Console.WriteLine("c. Withdraw");
             Console.WriteLine("d. Display sold");
-            Console.WriteLine("e. Exit");
-            
+            Console.WriteLine("e. Delete account");
+            Console.WriteLine("f. 3 accounts");
+            Console.WriteLine("g. Update adress");
+            Console.WriteLine("h. Exit");
             return action;
         }
     }
