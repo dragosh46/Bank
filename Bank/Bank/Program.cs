@@ -59,7 +59,9 @@ namespace Bank
                         
                         double initialAmount = CreateNewAccount.GetInitialAmount(depositIBAN);
                         CreateNewAccount.Deposit(depositIBAN, initialAmount);
+
                         action = 'm';
+
                         break;
                     case 'c':
                         Console.Clear();
@@ -68,7 +70,7 @@ namespace Bank
                         string withdrawIBAN = Console.ReadLine();
                         double initialWithdrawAmount = CreateNewAccount.GetInitialAmount(withdrawIBAN);
                         withdraw.GetWithdraw(withdrawIBAN, ref initialWithdrawAmount);
-
+                        action = 'm';
                         break;
                     case 'd':
                         Console.Clear();
@@ -76,6 +78,8 @@ namespace Bank
                         string soldIBAN = Console.ReadLine();
                         double soldAmount = CreateNewAccount.GetInitialAmount(soldIBAN);
                         Console.WriteLine("Your balance is: "+soldAmount);
+
+                        action = 'm';
                         break;
 
                     case 'e':
@@ -92,7 +96,7 @@ namespace Bank
                             Console.WriteLine($"{item.Amount}");
                             Console.WriteLine($"{item.Adress}" + Environment.NewLine);
                         }
-
+                        action = 'm';
                         break;
                     case 'f':
                         
@@ -104,7 +108,7 @@ namespace Bank
                             Console.WriteLine($"{listItem.Amount}");
                             Console.WriteLine($"{listItem.Adress}" + Environment.NewLine);
                         }
-
+                        action = 'm';
                         break;
                     case 'g':
                         
@@ -116,6 +120,7 @@ namespace Bank
                             Console.WriteLine($"{item.Amount}");
                             Console.WriteLine($"{item.Adress}" + Environment.NewLine);
                         }
+                        action = 'm';
                         break;
                     case 'h':
                         Console.Clear();

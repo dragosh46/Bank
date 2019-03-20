@@ -53,7 +53,11 @@ namespace Bank
         {
             Console.WriteLine("Enter the amount for deposit:");
             double amountToDeposit = Convert.ToDouble(Console.ReadLine());
-            return Amount += amountToDeposit;
+            Amount += amountToDeposit;
+            var obj = accountList.FirstOrDefault(c => c.IBAN == IBAN);
+            if (obj != null) obj.Amount = Amount;
+            
+            return Amount;
         }
 
         public double GetInitialAmount(string IBAN)
