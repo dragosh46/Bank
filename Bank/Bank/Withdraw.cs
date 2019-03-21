@@ -10,10 +10,8 @@ namespace Bank
     {
         public void GetWithdraw(string IBAN, ref double amount)
         {
-            Console.WriteLine("Please enter the IBAN code: ");
-            string verifyIBAN = Console.ReadLine();
-            if (verifyIBAN == IBAN)
-            {
+           
+            
                 Console.Clear();
                 Console.WriteLine("Please enter the withdrawal amount: ");
                 double withdrawalAmount = Convert.ToDouble(Console.ReadLine());
@@ -26,14 +24,11 @@ namespace Bank
                 {
                     double commision = (5d / 100)*withdrawalAmount;
                     withdrawalAmount -= commision;
-                    amount = amount - withdrawalAmount;// de pus conditie daca toata asta ==0 sa se faca loop
+                    amount = amount - withdrawalAmount-commision;// de pus conditie daca toata asta ==0 sa se faca loop
                    
                 }
-            }
-            else
-            {
-                Console.WriteLine("Please contact your bank.");
-            }
+            Console.WriteLine("Yout new balance is " + amount);
+            Console.ReadKey();
         }
     }
 }

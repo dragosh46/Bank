@@ -49,6 +49,7 @@ namespace Bank
             var updatedList = accountList;
             return updatedList;
         }
+
         public double Deposit(string IBAN, double Amount)
         {
             Console.WriteLine("Enter the amount for deposit:");
@@ -56,7 +57,8 @@ namespace Bank
             Amount += amountToDeposit;
             var obj = accountList.FirstOrDefault(c => c.IBAN == IBAN);
             if (obj != null) obj.Amount = Amount;
-            
+            Console.WriteLine("Yout new balance is "+ Amount);
+            Console.ReadKey();
             return Amount;
         }
 

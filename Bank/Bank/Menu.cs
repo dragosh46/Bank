@@ -8,17 +8,17 @@ namespace Bank
 {
     class Menu
     {
-        public char PrincipalMenu(ref char action)
+        public int PrincipalMenu(ref int action)
         {
             Console.Clear();
-            Console.WriteLine("a. Create account");
-            Console.WriteLine("b. Deposit");
-            Console.WriteLine("c. Withdraw");
-            Console.WriteLine("d. Display sold");
-            Console.WriteLine("e. Delete account");
-            Console.WriteLine("f. 3 accounts");
-            Console.WriteLine("g. Update adress");
-            Console.WriteLine("h. Exit"+Environment.NewLine);
+            Console.WriteLine("1. Create account");
+            Console.WriteLine("2. Deposit");
+            Console.WriteLine("3. Withdraw");
+            Console.WriteLine("4. Display sold");
+            Console.WriteLine("5. Delete account");
+            Console.WriteLine("6. 3 accounts");
+            Console.WriteLine("7. Update adress");
+            Console.WriteLine("8. Exit"+Environment.NewLine);
             return action;
         }
     }
