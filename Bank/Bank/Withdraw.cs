@@ -8,7 +8,7 @@ namespace Bank
 {
     public class Withdraw
     {
-        public void GetWithdraw(string IBAN, ref double amount)
+        public double GetWithdraw(string IBAN,double amount)
         {
            
             
@@ -29,6 +29,7 @@ namespace Bank
                 }
             Console.WriteLine("Yout new balance is " + amount);
             Console.ReadKey();
+            return amount;
         }
     }
 }

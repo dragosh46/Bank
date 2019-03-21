@@ -69,7 +69,7 @@ namespace Bank
                         Console.WriteLine("Enter the IBAN: ");
                         string withdrawIBAN = Console.ReadLine();
                         double initialWithdrawAmount = CreateNewAccount.GetInitialAmount(withdrawIBAN);
-                        withdraw.GetWithdraw(withdrawIBAN, ref initialWithdrawAmount);
+                        withdraw.GetWithdraw(withdrawIBAN, initialWithdrawAmount);
 
                         action = 0;
                         break;
