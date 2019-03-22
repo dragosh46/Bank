@@ -10,19 +10,19 @@ namespace Bank
     {
         static void Main(string[] args)
         {
-            int action=1;
+            
 
             Console.WriteLine("Enter the bank name:");
             string bankName = Console.ReadLine();
 
-
+            int action = (int)MenuOptions.Deposit;
             Menu menu = new Menu();
             menu.PrincipalMenu(ref action);
 
             Console.WriteLine("Choose an action:");
             action = Convert.ToInt32((Console.ReadLine()));
 
-
+            
             AccountList CreateNewAccount = new AccountList();
             while (action != 8)
             {
@@ -30,14 +30,15 @@ namespace Bank
                 
                 switch (action)
                 {
-                    case 0:
+                    case (int)MenuOptions.ReturnToMenu:
                         Menu menuReturn = new Menu();
                         menuReturn.PrincipalMenu(ref action);
 
                         Console.WriteLine("Choose an action:");
                         action = Convert.ToInt32(Console.ReadLine());
                         break;
-                    case 1:
+
+                    case (int)MenuOptions.Create_account:
                         Console.Clear();
                         
                         
@@ -53,68 +54,77 @@ namespace Bank
 
                         action = 0;
                         break;
-                    case 2:
+                    case (int)MenuOptions.Deposit:
                         Console.Clear();
                         Console.WriteLine("Enter the IBAN: ");
                         string depositIBAN = Console.ReadLine();
-                        
-                        double initialAmount = CreateNewAccount.GetInitialAmount(depositIBAN);
-                        CreateNewAccount.Deposit(depositIBAN, initialAmount);
+
+                        Account depositAccount = CreateNewAccount.GetInitialAccount(depositIBAN);
+                        CreateNewAccount.Deposit(depositIBAN, depositAccount);
 
                         action = 0;
                         break;
-                    case 3:
+
+                    case (int)MenuOptions.Withdraw:
                         Console.Clear();
                         Withdraw withdraw = new Withdraw();
                         Console.WriteLine("Enter the IBAN: ");
                         string withdrawIBAN = Console.ReadLine();
-                        double initialWithdrawAmount = CreateNewAccount.GetInitialAmount(withdrawIBAN);
-                        withdraw.GetWithdraw(withdrawIBAN, initialWithdrawAmount);
-
+                        Account withdrawAccount = CreateNewAccount.GetInitialAccount(withdrawIBAN);
+                        CreateNewAccount.GetWithdraw(withdrawIBAN, withdrawAccount);
+                        
                         action = 0;
                         break;
-                    case 4:
+
+                    case (int)MenuOptions.DisplaySold:
                         Console.Clear();
                         Console.WriteLine("Enter the IBAN: ");
                         string soldIBAN = Console.ReadLine();
-                        double soldAmount = CreateNewAccount.GetInitialAmount(soldIBAN);
-                        Console.WriteLine("Your balance is: "+soldAmount);
+                        Account soldAccount = CreateNewAccount.GetInitialAccount(soldIBAN);
+                        Console.WriteLine("Your balance is: "+ soldAccount.Amount);
                         Console.ReadKey();
 
                         action = 0;
                         break;
 
-                    case 5:
+                    case (int)MenuOptions.DeleteAccount:
                         Console.Clear();
                         Console.WriteLine("Enter the name for deleting the account:");
                         string nameForDelete = Console.ReadLine();
                         Console.WriteLine("Enter the IBAN for deleting the account:");
                         string ibanForDelete = Console.ReadLine();
                         var newList = CreateNewAccount.DeleteAccount(nameForDelete, ibanForDelete);
-                        foreach (var item in newList)
-                        {
-                            Console.WriteLine($"{item.Name}");
-                            Console.WriteLine($"{item.IBAN}");
-                            Console.WriteLine($"{item.Amount}");
-                            Console.WriteLine($"{item.Adress}" + Environment.NewLine);
-                        }
+                        //foreach (var item in newList)
+                        //{
+                        //    Console.WriteLine($"{item.Name}");
+                        //    Console.WriteLine($"{item.IBAN}");
+                        //    Console.WriteLine($"{item.Amount}");
+                        //    Console.WriteLine($"{item.Adress}" + Environment.NewLine);
+                        //}
+                        Console.Clear();
+                        Console.WriteLine("The account with: name "+nameForDelete+" and IBAN "+ibanForDelete+" was successfully deleted!");
+                        Console.ReadKey();
                         action = 0;
                         break;
-                    case 6:
+
+                    case (int)MenuOptions.MuchMoneyAccounts:
                         
                         var sortedList = CreateNewAccount.ordonatedList();
                         foreach (var listItem in sortedList)
                         {
-                            Console.WriteLine($"{listItem.Name}");
-                            Console.WriteLine($"{listItem.IBAN}");
-                            Console.WriteLine($"{listItem.Amount}");
-                            Console.WriteLine($"{listItem.Adress}" + Environment.NewLine);
+                            Console.WriteLine(Environment.NewLine);
+                            Console.WriteLine("Name "+$"{listItem.Name}");
+                            Console.WriteLine("IBAN "+$"{listItem.IBAN}");
+                            Console.WriteLine("Amount"+$"{listItem.Amount}");
+                            Console.WriteLine("Adress"+$"{listItem.Adress}" );
                         }
+                        Console.ReadKey();
                         action = 0;
                         break;
-                    case 7:
+
+                    case (int)MenuOptions.UpdateAdress:
                         
-                        var updatedList = CreateNewAccount.changeAccount();
+                        var updatedList = CreateNewAccount.changeAdress();
                         foreach (var item in updatedList)
                         {
                             Console.WriteLine($"{item.Name}");
@@ -124,7 +134,8 @@ namespace Bank
                         }
                         action = 0;
                         break;
-                    case 8:
+
+                    case (int)MenuOptions.Exit:
                         Console.Clear();
                         Environment.Exit(0);
                         break;

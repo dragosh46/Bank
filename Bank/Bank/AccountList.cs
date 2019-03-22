@@ -9,7 +9,7 @@ namespace Bank
 {
     class AccountList
     {
-       List<Account> accountList = new List<Account>();
+       public List<Account> accountList = new List<Account>();
         
         public IEnumerable<Account> returnAccountList()
         {
@@ -25,9 +25,7 @@ namespace Bank
         }
         public IEnumerable<Account> ordonatedList()
         {
-
-
-           var ordonatedList = accountList.OrderByDescending(x => x.Amount).Take(3);
+            var ordonatedList = accountList.OrderByDescending(x => x.Amount).Take(3);
             return ordonatedList;
         }
 
@@ -38,7 +36,7 @@ namespace Bank
             return accountList;
         }
 
-        public IEnumerable<Account> changeAccount()
+        public IEnumerable<Account> changeAdress()
         {
             Console.WriteLine("Enter the name for changing the adress:");
             string Name = Console.ReadLine();
@@ -47,27 +45,51 @@ namespace Bank
             var obj = accountList.FirstOrDefault(c => c.Name == Name);
             if (obj != null) obj.Adress = Adress;
             var updatedList = accountList;
+            Console.Clear();
+            Console.WriteLine("Your new adress is: "+obj.Adress);
+            Console.ReadKey();
             return updatedList;
         }
 
-        public double Deposit(string IBAN, double Amount)
+        public void Deposit(string IBAN, Account Amount)
         {
             Console.WriteLine("Enter the amount for deposit:");
             double amountToDeposit = Convert.ToDouble(Console.ReadLine());
-            Amount += amountToDeposit;
-            var obj = accountList.FirstOrDefault(c => c.IBAN == IBAN);
-            if (obj != null) obj.Amount = Amount;
-            Console.WriteLine("Yout new balance is "+ Amount);
+            Amount.Amount += amountToDeposit;
+           
+            Console.WriteLine("Yout new balance is "+ Amount.Amount);
             Console.ReadKey();
-            return Amount;
         }
 
-        public double GetInitialAmount(string IBAN)
+        public Account GetInitialAccount(string IBAN)
         {
             var initialAccount = accountList.SingleOrDefault(r => r.IBAN == IBAN);
-            double initialAmount = initialAccount.Amount;
-            return initialAmount;
+            return initialAccount;
         }
-        
+
+        public void GetWithdraw(string IBAN, Account Amount)
+        {
+
+
+            Console.Clear();
+            Console.WriteLine("Please enter the withdrawal amount: ");
+            double withdrawalAmount = Convert.ToDouble(Console.ReadLine());
+            double commision = 0;
+            if (withdrawalAmount > Amount.Amount)
+            {
+                Console.WriteLine("Insufficient funds!");
+                //De pus sa se faca loop
+            }
+            else
+            {
+                commision = (5d / 100) * withdrawalAmount;
+                withdrawalAmount -= commision;
+                Amount.Amount = Amount.Amount - withdrawalAmount - commision;// de pus conditie daca toata asta ==0 sa se faca loop
+
+            }
+            Console.WriteLine("Yout new balance is " + Amount.Amount+Environment.NewLine+"Your withdrawed amount is: "+ withdrawalAmount+", commision is: "+ commision);
+            Console.ReadKey();
+
+        }
     }
 }
